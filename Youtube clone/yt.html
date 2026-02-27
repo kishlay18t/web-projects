@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>YouTube Grid</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-left">
+      <button class="icon-btn hamburger">
+        <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"
+          style="display: block; width: 24px; height: 24px;">
+          <g>
+            <path d="M21 6H3V5h18v1zm0 5H3v1h18v-1zm0 6H3v1h18v-1z" class="yt-icon"></path>
+          </g>
+        </svg>
+      </button>
+      <a href="#" class="logo"
+        style="display: flex; align-items: center; gap: 4px; text-decoration: none; color: white;">
+        <img src="Logo/logo-1.jpeg" alt="YouTube Logo" style="height: 24px;">
+        <span class="logo-text">YouTube</span>
+      </a>
+    </div>
+
+    <div class="nav-center">
+      <div class="search-box">
+        <input type="text" placeholder="Search">
+        <button class="search-btn">
+          <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"
+            style="display: block; width: 24px; height: 24px;">
+            <g>
+              <path
+                d="M20.87 20.17l-5.59-5.59C16.35 13.35 17 11.75 17 10c0-3.87-3.13-7-7-7s-7 3.13-7 7 3.13 7 7 7c1.75 0 3.35-.65 4.58-1.28l5.59 5.59.7-.71zM10 16c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z"
+                class="yt-icon"></path>
+            </g>
+          </svg>
+        </button>
+      </div>
+      <button class="icon-btn voice-search" style="margin-left: 8px;">
+        <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"
+          style="display: block; width: 24px; height: 24px;">
+          <g>
+            <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z" class="yt-icon">
+            </path>
+            <path
+              d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"
+              class="yt-icon"></path>
+          </g>
+        </svg>
+      </button>
+    </div>
+
+    <div class="nav-right">
+      <button class="icon-btn create">
+        <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"
+          style="display: block; width: 24px; height: 24px;">
+          <g>
+            <path d="M14 13h-3v3H9v-3H6v-2h3V8h2v3h3v2z" class="yt-icon"></path>
+            <path
+              d="M21 6H3v12h18V6zm0-1c.55 0 1 .45 1 1v12c0 .55-.45 1-1 1H3c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1h18zM6 10v2h2v-2H6zm0 0"
+              class="yt-icon"></path>
+          </g>
+        </svg>
+      </button>
+      <button class="icon-btn notifications">
+        <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"
+          style="display: block; width: 24px; height: 24px;">
+          <g>
+            <path
+              d="M10 20h4c0 1.1-.9 2-2 2s-2-.9-2-2zm10-2.65V19H4v-1.65l2-1.88v-5.15c0-2.92 1.56-5.22 4-5.98V3.96c0-1.42 1.49-2.5 2.99-1.76.65.32 1.01 1.03 1.01 1.76v.39c2.44.75 4 3.06 4 5.98v5.15l2 1.88zM4.9 19H19v-1.15l-1-1v-5.45c0-2.85-2.09-5.12-4.9-5.12-2.8 0-4.9 2.27-4.9 5.12v5.45l-1 1V19z"
+              class="yt-icon"></path>
+          </g>
+        </svg>
+      </button>
+      <button class="icon-btn" style="padding: 1px;">
+        <img src="Logo/logo-1.jpeg" class="channel-avatar" style="width: 32px; height: 32px;" alt="Profile">
+      </button>
+    </div>
+  </nav>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <button class="sidebar-link">
+      <img src="https://raw.githubusercontent.com/youtube/studio/master/packages/icons/src/icons/home_filled.svg"
+        class="sidebar-icon" style="filter: invert(1);">
+      <div class="sidebar-text">Home</div>
+    </button>
+    <button class="sidebar-link">
+      <img src="https://raw.githubusercontent.com/youtube/studio/master/packages/icons/src/icons/explore.svg"
+        class="sidebar-icon" style="filter: invert(1);">
+      <div class="sidebar-text">Shorts</div>
+    </button>
+    <button class="sidebar-link">
+      <img src="https://raw.githubusercontent.com/youtube/studio/master/packages/icons/src/icons/subscriptions.svg"
+        class="sidebar-icon" style="filter: invert(1);">
+      <div class="sidebar-text">Subscriptions</div>
+    </button>
+    <button class="sidebar-link">
+      <img src="https://raw.githubusercontent.com/youtube/studio/master/packages/icons/src/icons/video_library.svg"
+        class="sidebar-icon" style="filter: invert(1);">
+      <div class="sidebar-text">You</div>
+    </button>
+  </div>
+
+  <main class="video-grid">
+
+    <!-- Card 1 -->
+    <article class="video-card">
+      <a href="#" class="video-card-link">
+        <div class="thumbnail-wrapper">
+          <img src="thumbnail/thumbnail-1.webp" alt="Video thumbnail">
+          <div class="video-time">14:20</div>
+        </div>
+        <div class="video-info">
+          <img class="channel-avatar" src="Logo/logo-1.jpeg" alt="Channel">
+          <div class="video-meta">
+            <h3 class="video-title">Talking Tech and AI with Google CEO Sundar Pichai</h3>
+            <p class="video-author">Marques Brownlee</p>
+            <p class="video-stats">3.4M views · 6 months ago</p>
+          </div>
+        </div>
+      </a>
+    </article>
+
+    <!-- Card 2 -->
+    <article class="video-card">
+      <a href="#" class="video-card-link">
+        <div class="thumbnail-wrapper">
+          <img src="thumbnail/thumbnail-1.webp" alt="Video thumbnail">
+        </div>
+        <div class="video-info">
+          <img class="channel-avatar" src="Logo/logo-1.jpeg" alt="Channel">
+          <div class="video-meta">
+            <h3 class="video-title">Talking Tech and AI with Google CEO Sundar Pichai</h3>
+            <p class="video-author">Marques Brownlee</p>
+            <p class="video-stats">3.4M views · 6 months ago</p>
+          </div>
+        </div>
+      </a>
+    </article>
+
+    <!-- Card 3 -->
+    <article class="video-card">
+      <a href="#" class="video-card-link">
+        <div class="thumbnail-wrapper">
+          <img src="thumbnail/thumbnail-1.webp" alt="Video thumbnail">
+        </div>
+        <div class="video-info">
+          <img class="channel-avatar" src="Logo/logo-1.jpeg" alt="Channel">
+          <div class="video-meta">
+            <h3 class="video-title">Talking Tech and AI with Google CEO Sundar Pichai</h3>
+            <p class="video-author">Marques Brownlee</p>
+            <p class="video-stats">3.4M views · 6 months ago</p>
+          </div>
+        </div>
+      </a>
+    </article>
+
+    <!-- Card 4 -->
+    <article class="video-card">
+      <a href="#" class="video-card-link">
+        <div class="thumbnail-wrapper">
+          <img src="thumbnail/thumbnail-1.webp" alt="Video thumbnail">
+        </div>
+        <div class="video-info">
+          <img class="channel-avatar" src="Logo/logo-1.jpeg" alt="Channel">
+          <div class="video-meta">
+            <h3 class="video-title">Talking Tech and AI with Google CEO Sundar Pichai</h3>
+            <p class="video-author">Marques Brownlee</p>
+            <p class="video-stats">3.4M views · 6 months ago</p>
+          </div>
+        </div>
+      </a>
+    </article>
+
+    <!-- Card 5 -->
+    <article class="video-card">
+      <a href="#" class="video-card-link">
+        <div class="thumbnail-wrapper">
+          <img src="thumbnail/thumbnail-1.webp" alt="Video thumbnail">
+        </div>
+        <div class="video-info">
+          <img class="channel-avatar" src="Logo/logo-1.jpeg" alt="Channel">
+          <div class="video-meta">
+            <h3 class="video-title">Talking Tech and AI with Google CEO Sundar Pichai</h3>
+            <p class="video-author">Marques Brownlee</p>
+            <p class="video-stats">3.4M views · 6 months ago</p>
+          </div>
+        </div>
+      </a>
+    </article>
+
+    <!-- Card 6 -->
+    <article class="video-card">
+      <a href="#" class="video-card-link">
+        <div class="thumbnail-wrapper">
+          <img src="thumbnail/thumbnail-1.webp" alt="Video thumbnail">
+        </div>
+        <div class="video-info">
+          <img class="channel-avatar" src="Logo/logo-1.jpeg" alt="Channel">
+          <div class="video-meta">
+            <h3 class="video-title">Talking Tech and AI with Google CEO Sundar Pichai</h3>
+            <p class="video-author">Marques Brownlee</p>
+            <p class="video-stats">3.4M views · 6 months ago</p>
+          </div>
+        </div>
+      </a>
+    </article>
+
+    <!-- Card 7 -->
+    <article class="video-card">
+      <a href="#" class="video-card-link">
+        <div class="thumbnail-wrapper">
+          <img src="thumbnail/thumbnail-1.webp" alt="Video thumbnail">
+        </div>
+        <div class="video-info">
+          <img class="channel-avatar" src="Logo/logo-1.jpeg" alt="Channel">
+          <div class="video-meta">
+            <h3 class="video-title">Talking Tech and AI with Google CEO Sundar Pichai</h3>
+            <p class="video-author">Marques Brownlee</p>
+            <p class="video-stats">3.4M views · 6 months ago</p>
+          </div>
+        </div>
+      </a>
+    </article>
+
+    <!-- Card 8 -->
+    <article class="video-card">
+      <a href="#" class="video-card-link">
+        <div class="thumbnail-wrapper">
+          <img src="thumbnail/thumbnail-1.webp" alt="Video thumbnail">
+        </div>
+        <div class="video-info">
+          <img class="channel-avatar" src="Logo/logo-1.jpeg" alt="Channel">
+          <div class="video-meta">
+            <h3 class="video-title">Talking Tech and AI with Google CEO Sundar Pichai</h3>
+            <p class="video-author">Marques Brownlee</p>
+            <p class="video-stats">3.4M views · 6 months ago</p>
+          </div>
+        </div>
+      </a>
+    </article>
+
+  </main>
+
+</body>
+
+</html>

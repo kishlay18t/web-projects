@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Wireframe-1-practice</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="wireframe-1-practice.css">
+</head>
+
+<body>
+    <header>
+        <div style="display: flex; justify-content: start; align-items: center; gap: 20px;">
+            <button class="sidebar-button" onclick="toggleSidebar()">&equiv;</button>
+            <div class="logo" style="margin-top: 5px;">WIRE-FRAME</div>
+        </div>
+        <button class="login">LOG IN</button>
+    </header>
+
+    <!-- Main div -->
+    <div class="container">
+        <div class="sidebar" id="Sidebar">
+            <a href="#" class="sidebar-btn">About</a>
+            <a href="#" class="sidebar-btn">Services</a>
+            <a href="#" class="sidebar-btn">Contact</a>
+        </div>
+
+        <!-- Sidebar script -->
+        <script>
+            let i = 0;
+            function toggleSidebar() {
+                const side = document.getElementById("Sidebar");
+
+                if (i === 1) {
+                    side.style.display = "none";
+                    i = 0;
+                }
+                else if (i === 0) {
+                    side.style.display = "flex";
+                    i = 1;
+                }
+            }
+        </script>
+
+        <main class="main-container">
+            <div class="hero-img">HERO VISUAL HIGHLIGHT</div>
+
+            <div class="video-player">▶</div>
+
+            <!-- KEY-BENEFITS SECTION -->
+            <section>
+                <h2 class="section-title">KEY BENEFITS</h3>
+
+                    <div class="benefits-grid">
+                        <div class="card">
+                            <h3>Efficient Design</h3>
+                            <p>Streamlined layout that focus on result first.</p>
+                        </div>
+                        <div class="card">
+                            <h3>Responsive</h3>
+                            <p>Adapts perfectly to any screen size.</p>
+                        </div>
+                        <div class="card">
+                            <h3>Customizable</h3>
+                            <p>Easy to tweak and make your own.</p>
+                        </div>
+                    </div>
+            </section>
+
+            <!-- TESTIMONIALS -->
+            <section>
+                <h2 class="section-title">TESTIMONIALS</h2>
+
+                <div class="testimonial-container">
+                    <button onclick="moveSlide(-1)" class="slider-btn prev-btn">&#10094;</button>
+
+                    <div class="slider">
+                        <div class="slide active">
+                            <div class="testimonial-avatar"></div>
+                            <div class="testimonial-text">
+                                <p>"This wireframe kit saved me hours of work. The code is clean and easy to
+                                    understand."
+                                </p>
+                                <strong>- Sarah J.</strong>
+                            </div>
+                        </div>
+
+                        <div class="slide">
+                            <div class="testimonial-avatar"></div>
+                            <div class="testimonial-text">
+                                <p>"100% Recommended, must check out!!"</p>
+                                <strong>- David K.</strong>
+                            </div>
+                        </div>
+
+                        <div class="slide">
+                            <div class="testimonial-avatar"></div>
+                            <div class="testimonial-text">
+                                <p>"Absolutely fantastic! I learned so much just by looking at the source code."</p>
+                                <strong>- James C.</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button onclick="moveSlide(1)" class="slider-btn next-btn">&#10095;</button>
+                </div>
+            </section>
+
+            <!-- Slider script logic -->
+            <script>
+                let slideIndex = 1;
+                showSlide(slideIndex);
+
+                function moveSlide(n) {
+                    showSlide(slideIndex += n)
+                }
+
+                function showSlide(n) {
+                    const slides = document.getElementsByClassName("slide");
+
+                    if (slideIndex > slides.length) {
+                        slideIndex = 1;
+                    }
+
+                    if (slideIndex < 1) {
+                        slideIndex = slides.length;
+                    }
+
+                    for (let i = 0; i < slides.length; i++) {
+                        slides[i].style.display = "none";
+                        slides[i].classList.remove("active");
+                    }
+
+                    slides[slideIndex - 1].style.display = "flex";
+                    slides[slideIndex - 1].classList.add("active");
+                }
+            </script>
+
+            <!-- CORE FEATURES -->
+            <section>
+                <h2 class="section-title">CORE FEATURES</h2>
+
+                <div class="features-grid">
+                    <div class="card">
+                        <h3 class="feature-heading">FAST LOADING</h3>
+                        <p class="feature-text">Minimal code ensures high performance.</p>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="feature-heading">SEO Friendly</h3>
+                        <p class="feature-text">Semantic tags help search engines.</p>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="feature-heading">Modern Style</h3>
+                        <p class="feature-text">Clean aesthetics that look professional.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- LOGIN SECTION -->
+            <section>
+                <div class="signup">
+                    <h3 class="signup-section-heading">Ready to Get Started?</h3>
+                    <div class="sign-up">
+                        <input type="email" placeholder="Enter your email address" class="email-input">
+                        <button class="subscribe-button">Subscribe</button>
+                    </div>
+                </div>
+            </section>
+
+
+        </main>
+    </div>
+
+
+    <footer>
+        <div class="footer-menu">
+            <a href="#">About</a>
+            <a href="#">Services</a>
+            <a href="#">Contact</a>
+        </div>
+
+        <div class="socials">
+            <div class="social-icon"></div>
+            <div class="social-icon"></div>
+            <div class="social-icon"></div>
+        </div>
+    </footer>
+</body>
+
+</html>

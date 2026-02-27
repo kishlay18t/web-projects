@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>YouTube.com Exercise</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+
+
+    <style>
+        body {
+            background-color: black;
+        }
+
+        p {
+            margin: 0;
+            padding: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        .video-grid {
+            display: grid;
+            gap: 10px;
+        }
+
+        @media (min-width: 1200px) {
+            .video-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        @media (max-width: 1199px) {
+            .video-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .video-card {
+            padding: 10px;
+            border-radius: 10px;
+            transition: all 0.7s;
+        }
+
+        .video-card:hover {
+            background-color: rgba(187, 204, 210, 0.5);
+        }
+
+        .video-thumbnail {
+            border-radius: 5px;
+        }
+
+        .thumbnail {
+            width: auto;
+            border-radius: 10px;
+        }
+
+        .video-details {
+            display: grid;
+            grid-template-columns: 1fr 7fr;
+            gap: 5px;
+            height: auto;
+        }
+
+        .channel-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+        }
+
+        .logo-img {
+            width: 45px;
+            border-radius: 25px;
+        }
+
+        .video-description {
+            display: inline-block;
+
+        }
+
+        .title {
+            font-weight: 500;
+            font-size: medium;
+            max-width: 100%;
+        }
+
+        .author {
+            margin-top: 3px;
+            font-size: 13px;
+            color: rgb(87, 87, 87);
+            display: inline-block;
+        }
+
+        .author:hover {
+            color: rgb(176, 176, 176);
+        }
+
+        .stats {
+            margin-top: 1px;
+            font-size: 13px;
+            color: rgb(87, 87, 87);
+        }
+
+        .video-1 {
+            text-decoration: none;
+            color: white;
+        }
+
+        .author-1 {
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="video-grid">
+        <div class="video-card">
+            <a class="video-1" href="https://www.youtube.com/watch?v=n2RNcPRtAiY" target="_blank">
+                <div class="video-thumbnail">
+                    <img src="thumbnail/thumbnail-1.webp" class="thumbnail" style="width: 100%;">
+                </div>
+
+                <div class="video-details">
+                    <div class="channel-logo">
+                        <img src="Logo/logo-1.jpeg" class="logo-img">
+                    </div>
+                    <div class="video-description">
+                        <p class="title">Talking Tech and AI with Google CEO Sundar Pichai!</p>
+                        <a class="author-1" href="https://www.youtube.com/c/mkbhd" target="_blank">
+                            <p class="author">Marques Brownlee</p>
+                        </a>
+                        <p class="stats">3.4M views &middot; 6 months ago</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="video-card">
+            <a class="video-1" href="https://www.youtube.com/watch?v=n2RNcPRtAiY" target="_blank">
+                <div class="video-thumbnail">
+                    <img src="thumbnail/thumbnail-1.webp" class="thumbnail" style="width: 100%;">
+                </div>
+
+                <div class="video-details">
+                    <div class="channel-logo">
+                        <img src="Logo/logo-1.jpeg" class="logo-img">
+                    </div>
+                    <div class="video-description">
+                        <p class="title">Talking Tech and AI with Google CEO Sundar Pichai!</p>
+                        <a class="author-1" href="https://www.youtube.com/c/mkbhd" target="_blank">
+                            <p class="author">Marques Brownlee</p>
+                        </a>
+                        <p class="stats">3.4M views &middot; 6 months ago</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="video-card">
+            <a class="video-1" href="https://www.youtube.com/watch?v=n2RNcPRtAiY" target="_blank">
+                <div class="video-thumbnail">
+                    <img src="thumbnail/thumbnail-1.webp" class="thumbnail" style="width: 100%;">
+                </div>
+
+                <div class="video-details">
+                    <div class="channel-logo">
+                        <img src="Logo/logo-1.jpeg" class="logo-img">
+                    </div>
+                    <div class="video-description">
+                        <p class="title">Talking Tech and AI with Google CEO Sundar Pichai!</p>
+                        <a class="author-1" href="https://www.youtube.com/c/mkbhd" target="_blank">
+                            <p class="author">Marques Brownlee</p>
+                        </a>
+                        <p class="stats">3.4M views &middot; 6 months ago</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="video-card">
+            <a class="video-1" href="https://www.youtube.com/watch?v=n2RNcPRtAiY" target="_blank">
+                <div class="video-thumbnail">
+                    <img src="thumbnail/thumbnail-1.webp" class="thumbnail" style="width: 100%;">
+                </div>
+
+                <div class="video-details">
+                    <div class="channel-logo">
+                        <img src="Logo/logo-1.jpeg" class="logo-img">
+                    </div>
+                    <div class="video-description">
+                        <p class="title">Talking Tech and AI with Google CEO Sundar Pichai!</p>
+                        <a class="author-1" href="https://www.youtube.com/c/mkbhd" target="_blank">
+                            <p class="author">Marques Brownlee</p>
+                        </a>
+                        <p class="stats">3.4M views &middot; 6 months ago</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="video-card">
+            <a class="video-1" href="https://www.youtube.com/watch?v=n2RNcPRtAiY" target="_blank">
+                <div class="video-thumbnail">
+                    <img src="thumbnail/thumbnail-1.webp" class="thumbnail" style="width: 100%;">
+                </div>
+
+                <div class="video-details">
+                    <div class="channel-logo">
+                        <img src="Logo/logo-1.jpeg" class="logo-img">
+                    </div>
+                    <div class="video-description">
+                        <p class="title">Talking Tech and AI with Google CEO Sundar Pichai!</p>
+                        <a class="author-1" href="https://www.youtube.com/c/mkbhd" target="_blank">
+                            <p class="author">Marques Brownlee</p>
+                        </a>
+                        <p class="stats">3.4M views &middot; 6 months ago</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+</body>
+
+</html>

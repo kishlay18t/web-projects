@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wireframe - Improved</title>
+    <link rel="stylesheet" href="wireframe-1.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo">WIRE - FRAME</div>
+        <button class="login">Log In</button>
+    </header>
+
+    <main class="container">
+        <!-- Hero Image -->
+        <div class="hero-image">HERO VISUAL HIGHLIGHT</div>
+
+        <!-- Video Player -->
+        <div class="video-player">▶</div>
+
+        <!-- Benefits Section -->
+        <section>
+            <h2 class="section-title">Key Benefits</h2>
+            <div class="grid-3">
+                <div class="card">
+                    <h3>Efficient Design</h3>
+                    <p>Streamlined layouts that focus on content first.</p>
+                </div>
+                <div class="card">
+                    <h3>Responsive</h3>
+                    <p>Adapts perfectly to any screen size.</p>
+                </div>
+                <div class="card">
+                    <h3>Customizable</h3>
+                    <p>Easy to tweak and make your own.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section>
+            <h2 class="section-title">Testimonials</h2>
+            <div class="testimonials">
+                <!-- Previous Button -->
+                <button class="slider-btn prev-btn" onclick="moveSlide(-1)">&#10094;</button>
+
+                <!-- Slider Container -->
+                <div class="testimonial-slider">
+
+                    <!-- Slide 1 (Active by default) -->
+                    <div class="testimonial-slide active">
+                        <div class="testimonial-avatar"></div>
+                        <div class="testimonial-text">
+                            <p>"This wireframe kit saved me hours of work. The code is clean and easy to understand."
+                            </p>
+                            <strong>- Alex J.</strong>
+                        </div>
+                    </div>
+
+                    <!-- Slide 2 -->
+                    <div class="testimonial-slide">
+                        <div class="testimonial-avatar" style="background: #ccc;"></div>
+                        <div class="testimonial-text">
+                            <p>"Absolutely fantastic! I learned so much just by looking at the source code."</p>
+                            <strong>- Sarah M.</strong>
+                        </div>
+                    </div>
+
+                    <!-- Slide 3 -->
+                    <div class="testimonial-slide">
+                        <div class="testimonial-avatar" style="background: #bbb;"></div>
+                        <div class="testimonial-text">
+                            <p>"A great starting point for any project. Highly recommended for beginners."</p>
+                            <strong>- David K.</strong>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Next Button -->
+                <button class="slider-btn next-btn" onclick="moveSlide(1)">&#10095;</button>
+            </div>
+        </section>
+
+        <!-- Simple Slider Script -->
+        <script>
+            let slideIndex = 1;
+            showSlides(slideIndex); 
+
+            // Function to move slides forward or backward
+            function moveSlide(n) {
+                showSlides(slideIndex += n);
+            }
+
+            function showSlides(n) 
+            {
+                let i;
+                let slides = document.getElementsByClassName("testimonial-slide");
+
+                // Loop back to start if at the end
+                if (n > slides.length) { slideIndex = 1 }
+
+                // Loop to end if at the start
+                if (n < 1) { slideIndex = slides.length }
+
+                // Hide all slides
+                for (i = 0; i < slides.length; i++) {
+                    slides[i].style.display = "none";
+                    slides[i].classList.remove("active");
+                }
+
+                // Show the current slide
+                slides[slideIndex - 1].style.display = "flex";
+                slides[slideIndex - 1].classList.add("active");
+            }
+        </script>
+
+        <!-- Features Section -->
+        <section>
+            <h2 class="section-title">Core Features</h2>
+            <div class="grid-3">
+                <div class="card">
+                    <h3>Fast Loading</h3>
+                    <p>Minimal code ensures high performance.</p>
+                </div>
+                <div class="card">
+                    <h3>SEO Friendly</h3>
+                    <p>Semantic tags help search engines.</p>
+                </div>
+                <div class="card">
+                    <h3>Modern Style</h3>
+                    <p>Clean aesthetics that look professional.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sign Up Section -->
+        <div class="signup">
+            <h2>Ready to get started?</h2>
+            <div class="form-group">
+                <input type="email" placeholder="Enter your email address">
+                <button>Subscribe</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-menu">
+            <a href="#">About</a>
+            <a href="#">Services</a>
+            <a href="#">Contact</a>
+        </div>
+        <div class="social-media">
+            <div class="social-icon"></div>
+            <div class="social-icon"></div>
+            <div class="social-icon"></div>
+        </div>
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,360 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: #fdfdfd;
+    color: #333;
+    line-height: 1.5;
+}
+
+button,
+.login {
+    font-family: inherit;
+}
+
+header {
+    background: white;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #333;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    font-weight: 800;
+    font-size: 20px;
+    letter-spacing: -0.5px;
+}
+
+.login {
+    background: white;
+    border: 2px solid #333;
+    padding: 8px 24px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 14px;
+    transition: all 0.2s;
+    text-transform: uppercase;
+}
+
+.login:hover {
+    background: #333;
+    color: white;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+.hero-image {
+    width: 100%;
+    height: 350px;
+    background: #eee;
+    border: 2px solid #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 40px 0;
+    font-size: 14px;
+    color: #777;
+    font-weight: 600;
+    letter-spacing: 1px;
+    border-radius: 8px;
+}
+
+.video-player {
+    width: 100%;
+    aspect-ratio: 16/9;
+    max-height: 500px;
+    background: #f4f4f4;
+    border: 2px solid #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 40px 0;
+    font-size: 64px;
+    color: #333;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.video-player:hover {
+    background: #e0e0e0;
+}
+
+.section-title {
+    margin: 30px 0 20px;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #555;
+}
+
+.grid-3 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin: 20px 0 40px;
+}
+
+.card {
+    background: white;
+    border: 2px solid #333;
+    padding: 30px;
+    text-align: center;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 4px 4px 0 #333;
+}
+
+.card h3 {
+    margin-bottom: 15px;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.testimonials {
+    background: white;
+    border: 2px solid #333;
+    padding: 40px 60px;
+    /* Added side padding for buttons */
+    margin: 20px 0 40px;
+    position: relative;
+    /* For button positioning */
+    border-radius: 8px;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.testimonial-slider {
+    width: 100%;
+}
+
+/* Individual Slide Styling */
+.testimonial-slide {
+    display: none;
+    /* Hidden by default */
+    align-items: center;
+    gap: 30px;
+    animation: fadeEffect 0.5s;
+    /* Smooth fade in */
+}
+
+/* The Active Slide - Visible */
+.testimonial-slide.active {
+    display: flex;
+}
+
+.testimonial-avatar {
+    width: 80px;
+    height: 80px;
+    background: #ddd;
+    border-radius: 50%;
+    border: 2px solid #333;
+    flex-shrink: 0;
+    margin-left: 20px;
+}
+
+.testimonial-text {
+    flex: 1;
+    min-width: 250px;
+    line-height: 1.8;
+    color: #555;
+}
+
+.testimonial-text strong {
+    display: block;
+    margin-top: 10px;
+    color: #333;
+    font-size: 0.9em;
+}
+
+/* Slider Navigation Buttons */
+.slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    background: #333;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    transition: background 0.2s;
+    user-select: none;
+    z-index: 10;
+}
+
+.slider-btn:hover {
+    background: #555;
+}
+
+.prev-btn {
+    left: 20px;
+}
+
+.next-btn {
+    right: 20px;
+}
+
+/* Fade Animation */
+@keyframes fadeEffect {
+    from {
+        opacity: 0.4;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.signup {
+    background: white;
+    border: 2px solid #333;
+    padding: 60px 20px;
+    margin: 40px 0;
+    text-align: center;
+    border-radius: 8px;
+}
+
+.signup h2 {
+    margin-bottom: 30px;
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+}
+
+.form-group {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.form-group input {
+    flex: 1;
+    padding: 12px 16px;
+    border: 2px solid #333;
+    font-size: 16px;
+    border-radius: 4px;
+    outline: none;
+}
+
+.form-group input:focus {
+    background-color: #fafafa;
+}
+
+.form-group button {
+    padding: 12px 30px;
+    background: #333;
+    color: white;
+    border: 2px solid #333;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    border-radius: 4px;
+    transition: opacity 0.2s;
+}
+
+.form-group button:hover {
+    opacity: 0.9;
+}
+
+footer {
+    background: white;
+    border-top: 2px solid #333;
+    padding: 40px;
+    margin-top: 60px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.footer-menu {
+    display: flex;
+    gap: 30px;
+}
+
+.footer-menu a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.footer-menu a:hover {
+    text-decoration: underline;
+}
+
+.social-media {
+    display: flex;
+    gap: 15px;
+}
+
+.social-icon {
+    width: 36px;
+    height: 36px;
+    background: #eee;
+    border: 2px solid #333;
+    border-radius: 50%;
+    transition: background 0.2s;
+    cursor: pointer;
+}
+
+.social-icon:hover {
+    background: #333;
+}
+
+@media (max-width: 768px) {
+    header {
+        padding: 15px 20px;
+    }
+
+    .container {
+        padding: 0 20px;
+    }
+
+    .testimonials {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .form-group {
+        flex-direction: column;
+    }
+
+    .form-group button {
+        width: 100%;
+    }
+}
