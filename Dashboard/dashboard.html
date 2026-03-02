@@ -1,256 +1,265 @@
 <!DOCTYPE html>
 
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Dashboard</title>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <link href="dashboard.css" rel="stylesheet">
-    </head>
 
-    <body>
-        <div class="grid-main">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="dashboard.css" rel="stylesheet">
+</head>
 
-            <!--Sidebar: Fixed-->
-            <div class="sidebar">
+<body>
+    <div class="grid-main">
 
-                <h3>SIDEBAR</h3>
-                <a href="#">Logo</a>
-                <a href="#">Dashboard</a>
-                <a href="#">Transaction</a>
-                <a href="#">Analytics</a>
-                <a href="#">Settings</a>
-            </div>
+        <!--Sidebar: Fixed-->
+        <div class="sidebar">
 
-            <!-- Header + Main -->
-            <div class="content-main">
+            <h3>SIDEBAR</h3>
+            <a href="#">Logo</a>
+            <a href="#">Dashboard</a>
+            <a href="#">Transaction</a>
+            <a href="#">Analytics</a>
+            <a href="#">Settings</a>
+        </div>
 
-                <!-- Header -->
-                <header>
-                    <div class="search-box">
-                        <input type="text" placeholder="search">
-                        <div class="logo">&#128269;</div>
+        <!-- Header + Main -->
+        <div class="content-main">
+
+            <!-- Header -->
+            <header>
+                <div class="search-box">
+                    <input type="text" placeholder="search">
+                    <div class="logo">&#128269;</div>
+                </div>
+
+                <div style="display: flex; gap: 15px; align-items: center;">
+                    <button class="add-tx-btn" onclick="showModal()">Add Transaction +</button>
+                    <div class="profile"></div>
+                </div>
+
+            </header>
+
+            <!-- Main content area -->
+            <main style="margin: 10px 10px; padding: 0px 5px; min-height: 1vh;">
+
+                <!-- Financial Statement Upload -->
+                <section class="upload-section">
+                    <h3 class="section-title">Upload Your Document Here</h3>
+                    <div>
+                        <input type="file" accept=".csv" id="fileInput">
+                        <button onclick="handleInput()">Upload</button>
                     </div>
 
-                    <div style="display: flex; gap: 15px; align-items: center;">
-                        <button class="add-tx-btn" onclick="showModal()">Add Transaction +</button>
-                        <div class="profile"></div>
-                    </div>
-                    
-                </header>
+                </section>
 
-                <!-- Main content area -->
-                <main style="margin: 10px 10px; padding: 0px 5px; min-height: 1vh;">
-
-                    <!-- Financial Statement Upload -->
-                     <section class="upload-section">
-                        <h3 class="section-title">Upload Your Document Here</h3>
-                        <div>
-                            <input type="file" accept=".csv" id="fileInput">
-                            <button onclick="handleInput()">Upload</button>
-                        </div>
-                        
-                     </section>
-
-                     <!-- Parsing Script -->
-                      <script>
-                        const input = document.getElementById("fileInput");
-                        input.addEventListener("change", parseIt);
+                <!-- Parsing Script -->
+                <script>
+                    const input = document.getElementById("fileInput");
+                    input.addEventListener("change", parseIt);
 
 
-                        function parseIt()
-                        {
-                            let income = 0, expense = 0;
+                    function parseIt() {
+                        let income = 0, expense = 0;
 
-                            const file = input.files[0];
-                            if (!file)
-                            {
-                                alert("Please select a CSV file!");
-                                return;   
+                        const file = input.files[0];
+                        if (!file) {
+                            alert("Please select a CSV file!");
+                            return;
+                        }
+
+                        const reader = new FileReader();
+                        reader.onload = function (e) {
+                            const text = e.target.result;
+                            const lines = text.split("\n");
+                            const parsed = [];
+
+                            for (let i = 1; i < lines.length; i++) {
+                                const cols = lines[i].split(",");
+                                if (cols.length < 4 || !cols[0].trim()) continue;
+
+                                const obj = {
+                                    date: cols[0].trim(),
+                                    name: cols[1].trim(),
+                                    category: cols[2].trim(),
+                                    amount: parseFloat(cols[3])
+                                };
+                                parsed.push(obj);
+
+                                /* Updating income, expenses and recent transactions */
+                                const amount = parseFloat(cols[3]);
+
+                                if (amount > 0)
+                                    income += amount;
+                                else
+                                    expense += amount;
                             }
 
-                            const reader = new FileReader();
-                            reader.onload = function (e)
-                            {
-                                const text = e.target.result;
-                                const lines = text.split("\n");
-                                const parsed = [];
+                            renderTable(parsed);
+                            renderChart(parsed);
 
-                                for (let i = 1; i < lines.length; i++)
-                                {
-                                    const cols = lines[i].split(",");
-                                    if (cols.length < 4)    continue;
-                                    
-                                    const obj = {
-                                        date: cols[0].trim(),
-                                        name: cols[1].trim (),
-                                        category: cols[2].trim(),
-                                        amount: parseFloat(cols[3])
-                                    };
-                                    parsed.push(obj);
+                            if (parsed.length > 0) {
+                                const recent_tx = parsed[parsed.length - 1];
 
-                                    /* Updating income, expenses and recent transactions */
-                                    const amount = parseFloat(cols[3]);
+                                document.getElementById("recent-tx-txt").innerHTML = `$${recent_tx.amount.toFixed(2)}`;
+                                document.getElementById("income-txt").innerHTML = `$${income.toFixed(2)}`;
+                                document.getElementById("expense-txt").innerHTML = `$${expense.toFixed(2)}`;
+                            }
 
-                                    if (amount > 0) 
-                                        income += amount;
-                                    else
-                                        expense += amount;
-                                }
 
-                                renderTable(parsed);
-
-                                if (parsed.length > 0)
-                                {
-                                    const recent_tx = parsed[parsed.length - 1];
-
-                                    document.getElementById("recent-tx-txt").innerHTML = `$${recent_tx.amount.toFixed(2)}`;
-                                    document.getElementById("income-txt").innerHTML = `$${income.toFixed(2)}`;
-                                    document.getElementById("expense-txt").innerHTML = `$${expense.toFixed(2)}`;
-                                }
-
-                                
-                            };
-
-                            reader.readAsText(file);
-                        };
-                      </script>
-
-                    <!-- Stats cards: Total, Income, Expense -->
-                    <section class="stats-section" style="display: flex; flex-direction: column;">
-                        <h3 class="section-title">
-                            <span style="color: lightgreen;">$</span> STATS
-                        </h3>
-
-                        <div class="card-grid">
-                            <div class="card">
-                                <h4>INCOME</h4>
-                                <p id="income-txt">$1400.00</p>
-                            </div>
-
-                            <div class="card">
-                                <h4>EXPENSES</h4>
-                                <p id="expense-txt">$349.01</p>
-                            </div>
-
-                            <div class="card">
-                                <h4>Recent Transaction</h4>
-                                <p id="recent-tx-txt">-$19.32</p>
-                            </div>
-                        </div>
-                        
-                    </section>
-                    <!-- Big Chart -->
-                     <div class="chart-section">
-                        <h3 class="section-title">EXPENSE CHART</h3>
-
-                        <div class="chart-wrapper">
-                            <div class="y-axis" id="y-axis"></div>
-                            <div class="chart" id="chart"></div>
-                        </div>
-                        
-                     </div>
-                     
-                    <!-- <canvas id="expense-chart"></canvas> -->
-
-                    <!-- Chart script -->
-                     <script>
-                        const expenses =
-                        {
-                            mon: 300,
-                            tue: 500,
-                            wed: 200,
-                            thur: 700,
-                            fri: 500,
-                            sat: 350,
-                            sun: 1000
                         };
 
+                        reader.readAsText(file);
+                    };
+                </script>
+
+                <!-- Stats cards: Total, Income, Expense -->
+                <section class="stats-section" style="display: flex; flex-direction: column;">
+                    <h3 class="section-title">
+                        <span style="color: lightgreen;">$</span> STATS
+                    </h3>
+
+                    <div class="card-grid">
+                        <div class="card">
+                            <h4>INCOME</h4>
+                            <p id="income-txt">$1400.00</p>
+                        </div>
+
+                        <div class="card">
+                            <h4>EXPENSES</h4>
+                            <p id="expense-txt">$349.01</p>
+                        </div>
+
+                        <div class="card">
+                            <h4>Recent Transaction</h4>
+                            <p id="recent-tx-txt">-$19.32</p>
+                        </div>
+                    </div>
+
+                </section>
+                <!-- Big Chart -->
+                <div class="chart-section">
+                    <h3 class="section-title">EXPENSE CHART</h3>
+
+                    <div class="chart-wrapper">
+                        <div class="y-axis" id="y-axis"></div>
+                        <div class="chart" id="chart"></div>
+                    </div>
+
+                </div>
+
+                <!-- <canvas id="expense-chart"></canvas> -->
+
+                <!-- Chart script -->
+                <script>
+
+
+
+                    function renderChart(parsed) {
                         const chart = document.getElementById("chart");
+                        chart.innerHTML = ""; // Clear old chart
+
+                        const expenses = {
+                            sun: 0, mon: 0, tue: 0, wed: 0, thur: 0, fri: 0, sat: 0
+                        };
+                        const dayName = ["sun", "mon", "tue", "wed", "thur", "fri", "sat"];
+
+                        for (let obj of parsed) {
+                            // GUARD 1: Skip if the amount is not a valid number
+                            if (isNaN(obj.amount)) continue;
+
+                            const date = new Date(obj.date);
+                            const days = date.getDay();
+
+                            // GUARD 2: Only add to expenses if the Date was valid
+                            if (!isNaN(days)) {
+                                const day = dayName[days];
+                                if (obj.amount < 0)
+                                    expenses[day] += Math.abs(obj.amount);
+                            }
+                        }
+
                         const value = Object.values(expenses);
-                        const Scale_max = Math.max(...value);
 
-                        for (let day in expenses)
-                        {
-                            const value = expenses[day];
+                        // GUARD 3: If all expenses are 0, force Scale_max to be 1 so we don't divide by zero!
+                        const Scale_max = Math.max(...value) || 1;
 
+                        for (let day in expenses) {
                             let bar = document.createElement("div");
                             bar.classList.add("bar");
 
-                            bar.style.height = (value / Scale_max) * 500 + "px";
+                            // Safely calculate height
+                            const chartHeight = chart.clientHeight
+                            bar.style.height = (expenses[day] / Scale_max) * chartHeight + "px";
                             bar.innerText = day;
 
                             chart.appendChild(bar);
                         }
 
-                     </script>
-
-                    <!-- Y Axis Script -->
-                     <script>
+                        // Y Axis Script
                         const steps = 5;
-                        
-
                         const yAxis = document.getElementById("y-axis");
-                        for (let i = steps; i >= 0; i--)
-                        {
+                        yAxis.innerHTML = "";
+
+                        for (let i = steps; i >= 0; i--) {
                             const label = document.createElement("div");
                             label.innerText = Math.floor(Scale_max / steps) * i;
-
                             yAxis.appendChild(label);
                         }
-                     </script>
+                    }
+                </script>
 
-                    <!-- Table: Recent Transactions -->
-                     <section class="transaction-history">
-                        <h3 class="section-title">Transaction History</h3>
-                        <div class="search-div">
-                            <input type="search" id="transaction-search" placeholder="Search" oninput="performSearch()">
-                        </div>
-                        
 
-                        <table class="transaction-table">
-                            <thead>
-                                <tr>
-                                    <th>DATE</th>
-                                    <th>NAME</th>
-                                    <th>CATEGORY</th>
-                                    <th>AMOUNT</th>
-                                </tr>
-                            </thead>
 
-                            <tbody id="transaction-body">
-                            </tbody>
-                        </table>
-                     </section>
+                <!-- Table: Recent Transactions -->
+                <section class="transaction-history">
+                    <h3 class="section-title">Transaction History</h3>
+                    <div class="search-div">
+                        <input type="search" id="transaction-search" placeholder="Search" oninput="performSearch()">
+                    </div>
 
-                     <!--Transaction Table Script-->
-                     <script>
-                        const transactions = 
+
+                    <table class="transaction-table">
+                        <thead>
+                            <tr>
+                                <th>DATE</th>
+                                <th>NAME</th>
+                                <th>CATEGORY</th>
+                                <th>AMOUNT</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="transaction-body">
+                        </tbody>
+                    </table>
+                </section>
+
+                <!--Transaction Table Script-->
+                <script>
+                    const transactions =
                         [
                             { date: "2024-02-20", name: "Apple Store", category: "Tech", amount: -499.00 },
                             { date: "2024-02-19", name: "Salary", category: "Income", amount: 2500.00 },
                             { date: "2024-02-18", name: "Starbucks", category: "Food", amount: -6.50 },
                         ];
 
-                        // Initial render
-                        renderTable(transactions);
+                    // Initial render
+                    renderTable(transactions);
 
-                        // Re-render the entire table again and again.
-                        function renderTable(dataToDisplay)
-                        {
-                            let tbody = document.getElementById("transaction-body");
+                    // Re-render the entire table again and again.
+                    function renderTable(dataToDisplay) {
+                        let tbody = document.getElementById("transaction-body");
 
-                            tbody.innerHTML = "";
+                        tbody.innerHTML = "";
 
-                            for (let tx of dataToDisplay)
-                            {
-                                const row = document.createElement("tr");
+                        for (let tx of dataToDisplay) {
+                            const row = document.createElement("tr");
 
-                                const color = (tx.amount > 0)?"green":"red";
-                                row.style.color = color;
-                                
-                                row.innerHTML =
+                            const color = (tx.amount > 0) ? "green" : "red";
+                            row.style.color = color;
+
+                            row.innerHTML =
                                 `
                                 <td>${tx.date}</td>
                                 <td>${tx.name}</td>
@@ -258,105 +267,101 @@
                                 <td>${tx.amount}</td>
                                 `;
 
-                                tbody.appendChild(row);
-                            }
+                            tbody.appendChild(row);
                         }
+                    }
 
-                        // To search whithin the transaction table
-                        function performSearch()
-                        {
-                            const query = document.getElementById("transaction-search").value.trim();
+                    // To search whithin the transaction table
+                    function performSearch() {
+                        const query = document.getElementById("transaction-search").value.trim();
 
-                            const filtered = transactions.filter(obj =>
-                                obj.category.toLowerCase().includes(query.toLowerCase()) ||
-                                obj.name.toLowerCase().includes(query.toLowerCase())
-                            );
+                        const filtered = transactions.filter(obj =>
+                            obj.category.toLowerCase().includes(query.toLowerCase()) ||
+                            obj.name.toLowerCase().includes(query.toLowerCase())
+                        );
 
-                            renderTable(filtered);
-                        }
-                     </script>
+                        renderTable(filtered);
+                    }
+                </script>
 
-                     <!-- Add transaction section - Overlay Modal -->
-                      <div id="add-tx" class="add-transaction">
-                        <h3 class="section-title">ADD TRANSACTION</h3>
+                <!-- Add transaction section - Overlay Modal -->
+                <div id="add-tx" class="add-transaction">
+                    <h3 class="section-title">ADD TRANSACTION</h3>
 
-                        <div class="transaction-modal">
-                            <div class="tx-date">
-                                <p>Date* (dd/mm/yyyy)</p>
-                                <input id="tx-date" type="date" placeholder="Enter the date (e.g., 12-09-2020)">
-                            </div>
-                            <div class="tx-name">
-                                <p>Name*</p>
-                                <input id="tx-name" type="text" placeholder="Enter the name (e.g., Apple)">
-                            </div>
-                            <div class="tx-category">
-                                <p>Category*</p>
-                                <input id="tx-category" type="text" placeholder="Enter the category (e.g., Income)">
-                            </div>
-                            <div class="tx-amount">
-                                <p>Amount*</p>
-                                <input id="tx-amount" type="text" placeholder="Enter the amount (e.g., -100)">
-                            </div>
-
-                            <div class="tx-btn-div">
-                                <button onclick="addTransaction()">Confirm</button>
-                                <button onclick="hideModal()">Cancel</button>
-                            </div>
+                    <div class="transaction-modal">
+                        <div class="tx-date">
+                            <p>Date* (dd/mm/yyyy)</p>
+                            <input id="tx-date" type="date" placeholder="Enter the date (e.g., 12-09-2020)">
                         </div>
-                      </div>
+                        <div class="tx-name">
+                            <p>Name*</p>
+                            <input id="tx-name" type="text" placeholder="Enter the name (e.g., Apple)">
+                        </div>
+                        <div class="tx-category">
+                            <p>Category*</p>
+                            <input id="tx-category" type="text" placeholder="Enter the category (e.g., Income)">
+                        </div>
+                        <div class="tx-amount">
+                            <p>Amount*</p>
+                            <input id="tx-amount" type="text" placeholder="Enter the amount (e.g., -100)">
+                        </div>
 
-                    <!-- Show and Hide Add Transaction modal -->
-                     <script>
-                        const tx_modal = document.getElementById("add-tx");
-                        function showModal()
-                        {
-                            tx_modal.style.display = "flex";
-                        }
+                        <div class="tx-btn-div">
+                            <button onclick="addTransaction()">Confirm</button>
+                            <button onclick="hideModal()">Cancel</button>
+                        </div>
+                    </div>
+                </div>
 
-                        function hideModal()
-                        {
-                            document.getElementById("tx-date").value = "";
-                            document.getElementById("tx-name").value = "";
-                            document.getElementById("tx-category").value = "";
-                            document.getElementById("tx-amount").value = "";
-                            tx_modal.style.display = "none";
-                        }
+                <!-- Show and Hide Add Transaction modal -->
+                <script>
+                    const tx_modal = document.getElementById("add-tx");
+                    function showModal() {
+                        tx_modal.style.display = "flex";
+                    }
 
-                        function addTransaction()
-                        {
-                            if (document.getElementById("tx-date").value === "" ||
+                    function hideModal() {
+                        document.getElementById("tx-date").value = "";
+                        document.getElementById("tx-name").value = "";
+                        document.getElementById("tx-category").value = "";
+                        document.getElementById("tx-amount").value = "";
+                        tx_modal.style.display = "none";
+                    }
+
+                    function addTransaction() {
+                        if (document.getElementById("tx-date").value === "" ||
                             document.getElementById("tx-name").value === "" ||
                             document.getElementById("tx-category").value === "" ||
-                            document.getElementById("tx-amount").value === "")
-                            {
-                                alert("Missing details to add transaction!");
-                                return;
-                            }
-
-                            const date = document.getElementById("tx-date").value;
-                            const name = document.getElementById("tx-name").value;
-                            const category = document.getElementById("tx-category").value;
-                            const amount = parseFloat(document.getElementById("tx-amount").value);
-
-                            const new_tx = {date, name, category, amount};
-                            transactions.push(new_tx);
-                            renderTable(transactions);
-
-                            document.getElementById("tx-date").value = "";
-                            document.getElementById("tx-name").value = "";
-                            document.getElementById("tx-category").value = "";
-                            document.getElementById("tx-amount").value = "";
-
-                            hideModal();
+                            document.getElementById("tx-amount").value === "") {
+                            alert("Missing details to add transaction!");
+                            return;
                         }
-                     </script>
 
-                     
-                      
-                </main>
+                        const date = document.getElementById("tx-date").value;
+                        const name = document.getElementById("tx-name").value;
+                        const category = document.getElementById("tx-category").value;
+                        const amount = parseFloat(document.getElementById("tx-amount").value);
 
-            </div>
+                        const new_tx = { date, name, category, amount };
+                        transactions.push(new_tx);
+                        renderTable(transactions);
+
+                        document.getElementById("tx-date").value = "";
+                        document.getElementById("tx-name").value = "";
+                        document.getElementById("tx-category").value = "";
+                        document.getElementById("tx-amount").value = "";
+
+                        hideModal();
+                    }
+                </script>
+
+
+
+            </main>
 
         </div>
-    </body>
+
+    </div>
+</body>
+
 </html>
