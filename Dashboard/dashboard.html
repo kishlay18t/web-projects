@@ -47,11 +47,53 @@
                      <section class="upload-section">
                         <h3 class="section-title">Upload Your Document Here</h3>
                         <div>
-                            <input type="file">
-                            <button>Upload</button>
+                            <input type="file" accept=".csv" id="fileInput">
+                            <button onclick="handleInput()">Upload</button>
                         </div>
                         
                      </section>
+
+                     <!-- Parsing Script -->
+                      <script>
+                        const input = document.getElementById("fileInput");
+                        input.addEventListener("change", parseIt);
+
+                        function parseIt()
+                        {
+                            const file = input.files[0];
+                            if (!file)
+                            {
+                                alert("Please select a CSV file!");
+                                return;   
+                            }
+
+                            const reader = new FileReader();
+                            reader.onload = function (e)
+                            {
+                                const text = e.target.result;
+                                const lines = text.split("\n");
+
+                                for (let i = 0; i < lines.length; i++)
+                                {
+                                    const cols = lines[i].split(",");
+                                    
+                                    const obj = {
+                                        date: cols[0],
+                                        name: cols[1],
+                                        category: cols[2],
+                                        amount: parseFloat(cols[3])
+                                    };
+
+                                    transactions.push(obj);
+                                }
+
+                                renderTable(transactions);
+                            };
+
+                            reader.readAsText(file);
+                        };
+
+                      </script>
 
                     <!-- Stats cards: Total, Income, Expense -->
                     <section class="stats-section" style="display: flex; flex-direction: column;">
@@ -286,6 +328,8 @@
                             hideModal();
                         }
                      </script>
+
+                     
                       
                 </main>
 
