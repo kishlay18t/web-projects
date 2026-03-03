@@ -59,7 +59,6 @@
                     const input = document.getElementById("fileInput");
                     input.addEventListener("change", parseIt);
 
-
                     function parseIt() {
                         let income = 0, expense = 0;
 
@@ -73,7 +72,7 @@
                         reader.onload = function (e) {
                             const text = e.target.result;
                             const lines = text.split("\n");
-                            const parsed = [];
+                            var parsed = [];
 
                             for (let i = 1; i < lines.length; i++) {
                                 const cols = lines[i].split(",");
@@ -98,6 +97,7 @@
 
                             renderTable(parsed);
                             renderChart(parsed);
+                            performSearch(parsed);
 
                             if (parsed.length > 0) {
                                 const recent_tx = parsed[parsed.length - 1];
@@ -216,7 +216,7 @@
                 <section class="transaction-history">
                     <h3 class="section-title">Transaction History</h3>
                     <div class="search-div">
-                        <input type="search" id="transaction-search" placeholder="Search" oninput="performSearch()">
+                        <input type="search" id="transaction-search" placeholder="Search" oninput="parseIt()">
                     </div>
 
 
@@ -245,7 +245,7 @@
                         ];
 
                     // Initial render
-                    renderTable(transactions);
+                    renderTable(parsed);
 
                     // Re-render the entire table again and again.
                     function renderTable(dataToDisplay) {
@@ -272,10 +272,10 @@
                     }
 
                     // To search whithin the transaction table
-                    function performSearch() {
+                    function performSearch(parsed) {
                         const query = document.getElementById("transaction-search").value.trim();
 
-                        const filtered = transactions.filter(obj =>
+                        const filtered = parsed.filter(obj =>
                             obj.category.toLowerCase().includes(query.toLowerCase()) ||
                             obj.name.toLowerCase().includes(query.toLowerCase())
                         );
@@ -343,8 +343,8 @@
                         const amount = parseFloat(document.getElementById("tx-amount").value);
 
                         const new_tx = { date, name, category, amount };
-                        transactions.push(new_tx);
-                        renderTable(transactions);
+                        parsed.push(new_tx);
+                        renderTable(parsed);
 
                         document.getElementById("tx-date").value = "";
                         document.getElementById("tx-name").value = "";
