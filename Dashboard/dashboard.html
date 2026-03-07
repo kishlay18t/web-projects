@@ -72,7 +72,7 @@
                         reader.onload = function (e) {
                             const text = e.target.result;
                             const lines = text.split("\n");
-                            var parsed = [];
+                            const parsed = [];
 
                             for (let i = 1; i < lines.length; i++) {
                                 const cols = lines[i].split(",");
@@ -98,6 +98,7 @@
                             renderTable(parsed);
                             renderChart(parsed);
                             performSearch(parsed);
+                            addTransaction(parsed);
 
                             if (parsed.length > 0) {
                                 const recent_tx = parsed[parsed.length - 1];
@@ -307,11 +308,11 @@
                         </div>
 
                         <div class="tx-btn-div">
-                            <button onclick="addTransaction()">Confirm</button>
+                            <button onclick="parseIt()">Confirm</button>
                             <button onclick="hideModal()">Cancel</button>
                         </div>
                     </div>
-                </div>
+                </div>-
 
                 <!-- Show and Hide Add Transaction modal -->
                 <script>
@@ -328,7 +329,7 @@
                         tx_modal.style.display = "none";
                     }
 
-                    function addTransaction() {
+                    function addTransaction(parsed) {
                         if (document.getElementById("tx-date").value === "" ||
                             document.getElementById("tx-name").value === "" ||
                             document.getElementById("tx-category").value === "" ||
