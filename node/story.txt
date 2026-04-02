@@ -1,0 +1,3 @@
+The quick brown fox jumps over the lazy dog.
+Node.js is just JavaScript running on your machine.
+This is going to be a word counter.
